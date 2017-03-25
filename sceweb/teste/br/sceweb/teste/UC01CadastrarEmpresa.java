@@ -8,15 +8,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.sceweb.modelo.Empresa;
-import br.sceweb.modelo.EmpresaDao;
+import br.sceweb.modelo.EmpresaDAO;
 
 public class UC01CadastrarEmpresa {
-	public static EmpresaDao empresaDao;
+	public static EmpresaDAO empresaDao;
 	public static Empresa empresa;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		empresaDao = new EmpresaDao();
+		empresaDao = new EmpresaDAO();
 		empresa = new Empresa();
 
 		empresa.setNomeDaEmpresa("empresa x");

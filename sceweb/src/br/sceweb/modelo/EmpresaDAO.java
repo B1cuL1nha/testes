@@ -8,7 +8,7 @@ import com.mysql.jdbc.Connection;
 
 import br.sceweb.servico.FabricaDeConexoes;
 
-public class EmpresaDao {
+public class EmpresaDAO {
 
 	public int adiciona(Empresa empresa) {
 		PreparedStatement ps;

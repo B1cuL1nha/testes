@@ -1,79 +1,39 @@
 package br.sceweb.modelo;
 
+
 import java.util.InputMismatchException;
-
+/**
+ * mantem as informações das empresas cadastras para oferecer convenio
+ * @author esadv6
+ *
+ */
 public class Empresa {
-	private String cnpj;
-	private String nomeDaEmpresa;
-	private String nomeFantasia;
-	private String endereco;
-	private String telefone;
-
+	String cnpj;
+	String nomeDaEmpresa;
+	String nomeFantasia;
+	String endereco;
+	String telefone;
+	
+	/*
+	 * Obtem cnpj
+	 */
 	public String getCnpj() {
 		return cnpj;
 	}
-
-	public void setCnpj(String cnpj) {
-		if (cnpj.equals("")) {
+	/*
+	 * atribui o cnpj vefica se o cnpj é valido
+	 */
+	public void setCnpj(String cnpj)  {
+		if (isValido(cnpj)){
 			this.cnpj = cnpj;
+		}
+		else
 			throw new IllegalArgumentException("CNPJ inválido!");
-		} else {
-			this.cnpj = cnpj;
-		}
-	}
-
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-
-	public void setNomeFantasia(String nomeFantasia) {
-		if (nomeFantasia.equals("")) {
-			this.nomeFantasia = nomeFantasia;
-			throw new IllegalArgumentException("Nome fantasia inválido!");
-		} else {
-			this.nomeFantasia = nomeFantasia;
-		}
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		if (endereco.equals("")) {
-			this.endereco = endereco;
-			throw new IllegalArgumentException("Endereço inválido!");
-		} else {
-			this.endereco = endereco;
-		}
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		if (telefone.equals("")) {
-			this.telefone = telefone;
-			throw new IllegalArgumentException("Número de telefone inválido!");
-		} else {
-			this.telefone = telefone;
-		}
-	}
-
-	public String getNomeDaEmpresa() {
-		return nomeDaEmpresa;
-	}
-
-	public void setNomeDaEmpresa(String nomeDaEmpresa) {
-		if (nomeDaEmpresa.equals("")) {
-			this.nomeDaEmpresa = nomeDaEmpresa;
-			throw new IllegalArgumentException("Nome da empresa inválido!");
-		} else {
-			this.nomeDaEmpresa = nomeDaEmpresa;
-		}
-	}
 	
+	}
+	/*
+	 * valida o cnpj
+	 */
 	public boolean isValido(String cnpj) {
 		char dig13, dig14; 
 		int sm, i, r, num, peso;
@@ -118,7 +78,7 @@ public class Empresa {
 			} 
 		r = sm % 11; 
 		if ((r == 0) || (r == 1)) dig14 = '0';
-		else dig14 = (	char)((11-r) + 48); 
+		else dig14 = (char)((11-r) + 48); 
 		// Verifica se os dígitos calculados conferem com os dígitos informados. 
 		if ((dig13 == cnpj.charAt(12)) && (dig14 == cnpj.charAt(13))) 
 			return(true); else return(false);
@@ -129,6 +89,54 @@ public class Empresa {
 	        return(false);
 	    }
 	}
+	public String getNomeDaEmpresa() {
+		return nomeDaEmpresa;
+	}
+	public void setNomeDaEmpresa(String nomeDaEmpresa) {
+		if (nomeDaEmpresa.equals("")){
+			this.nomeDaEmpresa = nomeDaEmpresa;
+			throw new IllegalArgumentException("nome da empresa inválido!");
+		}
+		else
+			this.nomeDaEmpresa = nomeDaEmpresa;
+		
+	}
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+	public void setNomeFantasia(String nomeFantasia) {		
+		if (nomeFantasia.equals("")){
+			this.nomeFantasia = nomeFantasia;
+			throw new IllegalArgumentException("nome Fantasia inválido!");
+		}
+		else			
+			this.nomeFantasia = nomeFantasia;
+	}
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		if (endereco.equals("")){
+			this.endereco = endereco;
+			throw new IllegalArgumentException("Endereço inválido!");
+		}
+		else			
+			this.endereco = endereco;		
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		if (telefone.equals("")){
+			this.telefone = telefone;
+			throw new IllegalArgumentException("Telefone inválido!");
+		}
+		else			
+			this.telefone = telefone;
+	}
+	
+	
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -179,4 +187,5 @@ public class Empresa {
 		}
 		return true;
 	}
+
 }
