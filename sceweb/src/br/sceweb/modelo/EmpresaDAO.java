@@ -8,7 +8,7 @@ import com.mysql.jdbc.Connection;
 
 import br.sceweb.servico.FabricaDeConexoes;
 
-public class EmpresaDAO {
+public class EmpresaDao {
 
 	public int adiciona(Empresa empresa) {
 		PreparedStatement ps;
@@ -50,8 +50,8 @@ public class EmpresaDAO {
 	}
 
 	public Empresa consultaEmpresa(String cnpj){
-		/*PreparedStatement ps;
-		Empresa empresa = null;
+		PreparedStatement ps;
+		Empresa empresa = new Empresa();
 		
 		try (Connection conn = new FabricaDeConexoes().getConnection()) {
 			ps = conn.prepareStatement("select * from empresa where cnpj = ?");
@@ -67,8 +67,7 @@ public class EmpresaDAO {
 			throw new RuntimeException(e);
 		}
 		
-		return empresa;*/
-		return new Empresa();
+		return empresa;
 	}
 	
 }

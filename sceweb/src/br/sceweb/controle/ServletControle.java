@@ -1,6 +1,7 @@
 package br.sceweb.controle;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import br.sceweb.modelo.Empresa;
-import br.sceweb.modelo.EmpresaDAO;
+import br.sceweb.modelo.EmpresaDao;
 
 /**
  * Servlet implementation class ServletControle
@@ -18,7 +19,7 @@ public class ServletControle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Logger logger = Logger.getLogger(ServletControle.class);
 	String mensagem = "";
-	EmpresaDAO empresaDAO;
+	EmpresaDao empresaDAO;
 	String cnpjParaExclusao = "";// seta o cnpj para exclusao
 
 	/**
@@ -107,7 +108,7 @@ public class ServletControle extends HttpServlet {
 			String telefone) {
 		String msg = "";
 		Empresa empresa = new Empresa();
-		EmpresaDAO empresaDAO = new EmpresaDAO();
+		EmpresaDao empresaDAO = new EmpresaDao();
 		try {
 			empresa.setCnpj(cnpj);
 			empresa.setNomeDaEmpresa(nomeDaEmpresa);
@@ -126,20 +127,19 @@ public class ServletControle extends HttpServlet {
 
 	public Empresa consulta(String cnpj) {
 		logger.info("consulta empresa 2 = " + cnpj);
-		EmpresaDAO empresaDAO = new EmpresaDAO();
+		EmpresaDao empresaDAO = new EmpresaDao();
 		return empresaDAO.consultaEmpresa(cnpj);
 	}
 
-	public String excluirEmpresa(String cnpj) {
-		String msg = "";
-		EmpresaDAO empresaDAO = new EmpresaDAO();
+	public int excluirEmpresa(String cnpj) {
+		int numeroDeLinhasAfetadas = 0;
+		EmpresaDao empresaDAO = new EmpresaDao();
 		try {
-			empresaDAO.exclui(cnpj);
-			msg = "excluido com sucesso";
+			numeroDeLinhasAfetadas = empresaDAO.exclui(cnpj);
 		} catch (Exception e) {
-			msg = e.getMessage();
+			throw new RuntimeException("CNPJ inválido");
 		}
 
-		return msg;
+		return numeroDeLinhasAfetadas;
 	}
 }
