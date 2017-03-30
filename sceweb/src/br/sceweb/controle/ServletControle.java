@@ -22,7 +22,7 @@ public class ServletControle extends HttpServlet {
 	EmpresaDao empresaDAO;
 	String cnpjParaExclusao = "";// seta o cnpj para exclusao
 
-	/**
+	/** 
 	 * Default constructor.
 	 */
 	public ServletControle() {
