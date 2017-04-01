@@ -48,7 +48,13 @@ public class ServletControle extends HttpServlet {
 		request.setAttribute("erro", null);
 		executaComando(request, response);
 	}
-
+/**
+ * executaComando  : Procedimento para puxar os campos no formulario. 
+ * @param request: 
+ * @param response 
+ * @throws ServletException
+ * @throws IOException
+ */
 	protected void executaComando(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String parametro = request.getParameter("acao");
@@ -104,6 +110,16 @@ public class ServletControle extends HttpServlet {
 
 	}
 
+	/**
+	 * cadastrarEmpresa: Metodo para o cadastro de uma empresa.
+	 * @param cnpj
+	 * @param nomeDaEmpresa
+	 * @param nomeFantasia
+	 * @param endereco
+	 * @param telefone
+	 * @return
+	 */
+	
 	public String cadastrarEmpresa(String cnpj, String nomeDaEmpresa, String nomeFantasia, String endereco,
 			String telefone) {
 		String msg = "";
