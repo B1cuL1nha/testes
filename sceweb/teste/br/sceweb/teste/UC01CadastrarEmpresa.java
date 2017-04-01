@@ -10,15 +10,15 @@ import org.junit.Test;
 
 import br.sceweb.controle.ServletControle;
 import br.sceweb.modelo.Empresa;
-import br.sceweb.modelo.EmpresaDao;
+import br.sceweb.modelo.EmpresaDAO;
 
 public class UC01CadastrarEmpresa {
-	public static EmpresaDao empresaDao;
+	public static EmpresaDAO empresaDAO;
 	public static Empresa empresa;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		empresaDao = new EmpresaDao();
+		empresaDAO = new EmpresaDAO();
 		empresa = new Empresa();
 
 		empresa.setNomeDaEmpresa("empresa x");
@@ -33,7 +33,7 @@ public class UC01CadastrarEmpresa {
 	 */
 	@Test
 	public void CT01UC01FB_cadastrar_empresa_com_sucesso() {
-		assertEquals(1, empresaDao.adiciona(empresa));
+		assertEquals(1, empresaDAO.adiciona(empresa));
 	}
 
 	/**
@@ -150,7 +150,8 @@ public class UC01CadastrarEmpresa {
 		empresaCamposInvalidos.setCnpj("");
 		empresaCamposInvalidos.setNomeDaEmpresa("");
 		empresaCamposInvalidos.setNomeFantasia("");
-		empresaCamposInvalidos.setEndereco("");
+		empresaCamposInvalidos
+		.setEndereco("");
 		empresaCamposInvalidos.setTelefone("");
 	}
 
@@ -162,7 +163,7 @@ public class UC01CadastrarEmpresa {
 		Empresa empresa = new Empresa();
 
 		try {
-			empresaDao.adiciona(empresa);
+			empresaDAO.adiciona(empresa);
 		} catch (RuntimeException e) {
 			fail("Dados inválidos.");
 		}
@@ -175,7 +176,7 @@ public class UC01CadastrarEmpresa {
 	public void CT15UC01A14_excluir_empresa_com_cnpj_null() {
 		/* Revisar */
 		try {
-			empresaDao.exclui(null);
+			empresaDAO.exclui(null);
 		} catch (RuntimeException e) {
 			fail("Dados inválidos.");
 		}
@@ -193,8 +194,8 @@ public class UC01CadastrarEmpresa {
 			empresa.setNomeFantasia("empresa x");
 			empresa.setEndereco("rua taquari");
 			empresa.setTelefone("2222");
-			empresaDao.adiciona(empresa);
-			empresaDao.consultaEmpresa("78666151000170");
+			empresaDAO.adiciona(empresa);
+			empresaDAO.consultaEmpresa("78666151000170");
 		} catch (RuntimeException e) {
 			fail("Dados inválidos.");
 		}
@@ -294,8 +295,8 @@ public class UC01CadastrarEmpresa {
 
 	@After
 	public void teardown() {
-		empresaDao.exclui("78666151000170");
-		empresaDao.exclui("89424232000180");
+		empresaDAO.exclui("78666151000170");
+		empresaDAO.exclui("89424232000180");
 	}
 }
 

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import br.sceweb.modelo.Empresa;
-import br.sceweb.modelo.EmpresaDao;
+import br.sceweb.modelo.EmpresaDAO;
 
 /**
  * Servlet implementation class ServletControle
@@ -19,7 +19,7 @@ public class ServletControle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Logger logger = Logger.getLogger(ServletControle.class);
 	String mensagem = "";
-	EmpresaDao empresaDAO;
+	EmpresaDAO empresaDAO;
 	String cnpjParaExclusao = "";// seta o cnpj para exclusao
 
 	/** 
@@ -108,7 +108,7 @@ public class ServletControle extends HttpServlet {
 			String telefone) {
 		String msg = "";
 		Empresa empresa = new Empresa();
-		EmpresaDao empresaDAO = new EmpresaDao();
+		EmpresaDAO empresaDAO = new EmpresaDAO();
 		try {
 			empresa.setCnpj(cnpj);
 			empresa.setNomeDaEmpresa(nomeDaEmpresa);
@@ -127,13 +127,13 @@ public class ServletControle extends HttpServlet {
 
 	public Empresa consulta(String cnpj) {
 		logger.info("consulta empresa 2 = " + cnpj);
-		EmpresaDao empresaDAO = new EmpresaDao();
+		EmpresaDAO empresaDAO = new EmpresaDAO();
 		return empresaDAO.consultaEmpresa(cnpj);
 	}
 
 	public int excluirEmpresa(String cnpj) {
 		int numeroDeLinhasAfetadas = 0;
-		EmpresaDao empresaDAO = new EmpresaDao();
+		EmpresaDAO empresaDAO = new EmpresaDAO();
 		try {
 			numeroDeLinhasAfetadas = empresaDAO.exclui(cnpj);
 		} catch (Exception e) {

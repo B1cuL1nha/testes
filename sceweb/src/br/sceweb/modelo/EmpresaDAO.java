@@ -8,7 +8,7 @@ import com.mysql.jdbc.Connection;
 
 import br.sceweb.servico.FabricaDeConexoes;
 
-public class EmpresaDao {
+public class EmpresaDAO {
 
 	public int adiciona(Empresa empresa) {
 		PreparedStatement ps;
@@ -49,25 +49,47 @@ public class EmpresaDao {
 		return codigoretorno;
 	}
 
-	public Empresa consultaEmpresa(String cnpj){
-		PreparedStatement ps;
-		Empresa empresa = new Empresa();
-		
+//	public Empresa consultaEmpresa(String cnpj){
+//		PreparedStatement ps;
+//		Empresa empresa = new Empresa();
+//		
+//		try (Connection conn = new FabricaDeConexoes().getConnection()) {
+//			ps = conn.prepareStatement("select * from empresa where cnpj = ?");
+//			ps.setString(1, cnpj);
+//			ResultSet rs = ps.executeQuery();
+//			rs.first();
+//			empresa.setCnpj(rs.getString(1));
+//			empresa.setNomeDaEmpresa(rs.getString(2));
+//			empresa.setNomeFantasia(rs.getString(3));
+//			empresa.setEndereco(rs.getString(4));
+//			empresa.setTelefone(rs.getString(5));
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//		
+//		return empresa;
+//	}
+	public static Empresa consultaEmpresa(String cnpj) {
+		Empresa empresa = null;
+		java.sql.PreparedStatement ps;
 		try (Connection conn = new FabricaDeConexoes().getConnection()) {
-			ps = conn.prepareStatement("select * from empresa where cnpj = ?");
-			ps.setString(1, cnpj);
-			ResultSet rs = ps.executeQuery();
-			rs.first();
-			empresa.setCnpj(rs.getString(1));
-			empresa.setNomeDaEmpresa(rs.getString(2));
-			empresa.setNomeFantasia(rs.getString(3));
-			empresa.setEndereco(rs.getString(4));
-			empresa.setTelefone(rs.getString(5));
+		ps = conn.prepareStatement("select * from empresa where cnpj = ?");
+		ps.setString(1, cnpj);
+		ResultSet resultSet = ps.executeQuery();
+		while (resultSet.next()) {
+		empresa = new Empresa();
+		empresa.setCnpj(resultSet.getString("cnpj"));
+		empresa.setNomeDaEmpresa(resultSet.getString("nomeDaEmpresa"));
+		empresa.setNomeFantasia(resultSet.getString("nomeFantasia"));
+		empresa.setEndereco(resultSet.getString("endereco"));
+		empresa.setTelefone(resultSet.getString("telefone"));
+		}
+		resultSet.close();
+		ps.close();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		throw new RuntimeException(e);
 		}
 		
 		return empresa;
-	}
-	
+		}	
 }

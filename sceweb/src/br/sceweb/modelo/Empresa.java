@@ -19,6 +19,7 @@ public class Empresa {
 			throw new IllegalArgumentException("CNPJ inválido!");
 		} else {
 			this.cnpj = cnpj;
+			
 		}
 	}
 
